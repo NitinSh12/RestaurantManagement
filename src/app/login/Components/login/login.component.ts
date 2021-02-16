@@ -24,10 +24,10 @@ export class LoginComponent implements OnInit {
     // success part
 }
 
-/* Handle form errors in Angular 8 */
-public errorHandling = (control: string, error: string) => {
-  return this.loginForm.controls[control].hasError(error);
-}
+  /* Handle form errors in Angular 8 */
+  public errorHandling = (control: string, error: string) => {
+    return this.loginForm.controls[control].hasError(error);
+  }
 
   private initForm() {
     return this.fb.group({

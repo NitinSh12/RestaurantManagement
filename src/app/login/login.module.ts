@@ -7,6 +7,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AngularMaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

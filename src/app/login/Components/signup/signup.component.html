@@ -4,32 +4,50 @@
         <mat-card-title>Register</mat-card-title>
       </mat-card-header>
   
-      <form class="example-form">
+      <form class="example-form" [formGroup] ="signupForm">
   
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username">
+            <input matInput placeholder="Username" name="userName" formControlName="userName">
+            <mat-error *ngIf="errorHandling('userName', 'required')">
+                You must provide a<strong> Username</strong>
+            </mat-error>
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email">
+            <input matInput placeholder="Email" name="email" formControlName="email">
+            <mat-error *ngIf="errorHandling('email', 'required')">
+                You must provide an<strong> email</strong>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('email', 'email')">
+                Please provide valid<strong> email</strong>
+            </mat-error>
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password">
+            <input matInput placeholder="Password" type="password" name="password" formControlName="password">
+            <mat-error *ngIf="errorHandling('password', 'required')">
+                You must provide a<strong> Password</strong>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('password', 'minlength')">
+                Password must have atleast <strong> 4 characters</strong>
+            </mat-error>
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
             <mat-label>Choose a role...</mat-label>
-            <mat-select>
+            <mat-select name="roles" formControlName="roles">
               <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="errorHandling('roles', 'required')">
+                You must select a<strong> role</strong>
+            </mat-error>
           </mat-form-field>
   
         </mat-card-content>
   
-        <button mat-stroked-button color="accent" class="btn-block">Register</button>
+        <button mat-raised-button color="accent" class="btn-block">Register</button>
   
       </form>
     </mat-card>

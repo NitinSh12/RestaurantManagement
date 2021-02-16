@@ -4,30 +4,43 @@
       <mat-card-header>
         <mat-card-title>Log in</mat-card-title>
       </mat-card-header>
-  
-      <form class="example-form">
+      <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username">
+            <input matInput placeholder="Username" name="userName" formControlName="userName">
+            <mat-error *ngIf="errorHandling('userName', 'required')">
+                You must provide a<strong> Username</strong>
+            </mat-error>
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password">
+            <input matInput placeholder="Password" type="password" name="password" formControlName="password" minlength="4">
+            <mat-error *ngIf="errorHandling('password', 'required')">
+                You must provide a<strong> Password</strong>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('password', 'minlength')">
+                Password must have atleast <strong> 4 characters</strong>
+            </mat-error>
           </mat-form-field>
         </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block">Log in</button>
+        <button mat-raised-button color="accent" class="btn-block">Log in</button>
         <p>Not a member?
             <a routerLink="../register">Register</a>
         </p>
 
         <!-- Social login -->
       <p>or sign in with:</p>
-      <a type="button" mat-button floating="true" color="fb" size="sm">
-        <mat-icon aria-hidden="false">facebook</mat-icon>
-      </a>
-      <a type="button" mat-button floating="true" color="tw" size="sm">
-        <mat-icon aria-hidden="false">mail_outline</mat-icon>
-      </a>
+        <div class="social-media-button-container">
+          <a type="button" mat-mini-fab color="primary">
+            <mat-icon aria-hidden="false">facebook</mat-icon>
+          </a>
+          <a type="button" mat-mini-fab color="warn">
+            <mat-icon aria-hidden="false">mail_outline</mat-icon>
+          </a>
+          <a type="button" mat-mini-fab color="accent">
+            <mat-icon aria-hidden="false">phone_enables</mat-icon>
+          </a>
+        </div>
       </form>
     </mat-card>
   

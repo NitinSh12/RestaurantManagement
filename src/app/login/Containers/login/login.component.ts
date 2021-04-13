@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
         return;
     }
     // success part
-}
+  }
 
   /* Handle form errors in Angular 8 */
   public errorHandling = (control: string, error: string) => {

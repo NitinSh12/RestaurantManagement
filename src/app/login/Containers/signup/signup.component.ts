@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user-model';
 import { UnsavedChangesGuard } from 'src/app/shared/models/unsaved-changes-guard-model';
+import { SignupServiceService } from '../../Services/signup-service.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,8 +12,9 @@ import { UnsavedChangesGuard } from 'src/app/shared/models/unsaved-changes-guard
 export class SignupComponent implements OnInit, UnsavedChangesGuard {
   Roles: any = ['Admin', 'Author', 'Reader'];
   signupForm = this.initForm();
+  registerClicked = new EventEmitter<User>();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private signupServiceService: SignupServiceService) { }
 
   ngOnInit(): void {
   }
@@ -20,9 +23,23 @@ export class SignupComponent implements OnInit, UnsavedChangesGuard {
     return !this.signupForm.dirty;
   }
 
+  onSubmit() {
+    // stop here if form is invalid
+    if (this.signupForm.invalid) {
+        return;
+    }
+
+    // success part
+    this.signupServiceService.registerUser(this.signupForm.value as User).subscribe(this.userSignedUp);
+  }
+
   /* Handle form errors in Angular 8 */
   public errorHandling = (control: string, error: string) => {
     return this.signupForm.controls[control].hasError(error);
+  }
+
+  private userSignedUp(message: string) {
+    console.log(message);
   }
 
   private initForm() {

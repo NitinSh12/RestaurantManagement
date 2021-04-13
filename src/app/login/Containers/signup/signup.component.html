@@ -4,7 +4,7 @@
         <mat-card-title>Register</mat-card-title>
       </mat-card-header>
   
-      <form class="example-form" [formGroup] ="signupForm">
+      <form class="example-form" [formGroup] ="signupForm" (ngSubmit)="onSubmit()">
   
         <mat-card-content>
           <mat-form-field class="example-full-width">
